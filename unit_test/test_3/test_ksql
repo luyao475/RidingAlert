@@ -1,0 +1,6 @@
+CREATE STREAM test_aggre
+  (taxiid STRING,triptime bigint, x string)
+  WITH (KAFKA_TOPIC='test_aggre',
+        VALUE_FORMAT='DELIMITED',
+        KEY='taxiid',
+        timestamp='triptime');
