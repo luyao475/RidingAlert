@@ -8,3 +8,11 @@ sudo add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.3 
 
 Update apt-get and install the entire Confluent Platform platform.
 sudo apt-get update && sudo apt-get install confluent-platform-2.12
+
+Remember to creat 'myid' file for each of the Zookeeper servers
+Navigate to the ZooKeeper log directory (e.g., /var/lib/zookeeper/) and create a file named myid. 
+The myid file consists of a single line that contains the machine ID in the format <machine-id>. 
+When the ZooKeeper server starts up, it knows which server it is by referencing the myid file. 
+For example, server 1 will have a myid value of 1.
+
+
