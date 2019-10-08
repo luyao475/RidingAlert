@@ -11,6 +11,6 @@ install boto3: https://pypi.org/project/boto3/
 boto requires aws cli to install:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html  
 
-then run "aws config" to set credentials
+run "aws config" to set credentials
 https://forums.aws.amazon.com/thread.jspa?threadID=141985  
 
