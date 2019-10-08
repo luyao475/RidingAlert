@@ -1,0 +1,16 @@
+Run producer
+python producer_main.py 
+
+Streaming
+Open KSQL cli: ksql http://x.x.x.x:8088
+In KSQL: 
+ksql>run script '/ksql/fatigue_detect.sql'
+to query
+ksql>select * from table_aggre_sum;
+ksql>select * from fatigue_drivers;
+
+Other operations
+ksql> show queries/tables/streams;
+ksql> terminate qurey_name;
+ksql> drop table table_name;
+ksql> drop stream stream_name;
