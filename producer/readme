@@ -1,0 +1,16 @@
+Create the kafka topic befor running the producer:
+/usr/bin/kafka-topics --create --bootstrap-server x.x.x.x:9092 --replication-factor 1 --partitions 3 --topic topic_name
+
+Other operations:
+/usr/bin/kafka-topics --describe --bootstrap-server x.x.x.x:9092 --topic topic_name
+/usr/bin/kafka-topics — zookeeper x.x.x.x:2181 — delete — topic topic_name
+
+Requirement for running producer
+install boto3: https://pypi.org/project/boto3/   
+
+boto requires aws cli to install:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html  
+
+then run "aws config" to set credentials
+https://forums.aws.amazon.com/thread.jspa?threadID=141985  
+
