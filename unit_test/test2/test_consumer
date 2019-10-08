@@ -1,6 +1,6 @@
 from kafka import KafkaConsumer
 consumer = KafkaConsumer(
-    'test-s3-1',
+    'read-s3',
      bootstrap_servers=['localhost:9092'],
      auto_offset_reset='earliest',
      enable_auto_commit=False,
