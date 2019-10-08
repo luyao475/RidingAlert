@@ -21,6 +21,6 @@ while True:
         #msg = helpers.map_schema(message_info, self.schema)
 #        data = {'number' : line}
 
-        producer.send('test',value=line)
+        producer.send('read_s3',value=line)
 
         time.sleep(0.1)
