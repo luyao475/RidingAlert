@@ -1,0 +1,44 @@
+from kafka import KafkaConsumer
+import boto3
+import csv
+from io import BytesIO as StringIO
+buff = StringIO()
+
+writer = csv.writer(buff, dialect='excel', delimiter=',')
+
+consumer = KafkaConsumer(
+    'TABLE_AGGRE_SUM',
+     bootstrap_servers=['x.x.x.x:9092'],
+     auto_offset_reset='earliest',
+     enable_auto_commit=False,
+      )
+table_sum={}
+driver_id=['bbf91e6720', 'a7108907c0', 'e6f3cad6dc','7b30c143d8',
+                    'd4ec191400','7075c4988c','38e76b9881','e5d37daef0','94085c487e',
+                    'dcf0b59678','eb49db316d','199fa05b63','dec2aa8551',
+                    'eeace255eb','5e00738ed9','3446442418','a8aee50b5b','b44b941840',
+                    '72920f6ebc','8678f1d459']
+
+driving_time=[0]*20
+for message in consumer:
+    message = message.value
+    key = message.split(',')[0]
+    value = int(message.split(',')[1])
+    table_sum[key]=value
+    #print ('keys',table_sum.keys())
+    #print ('values',table_sum.values()[:20])
+    driving_time_pre = driving_time
+    for i in range (20):
+        if key == driver_id[i]:
+            driving_time[i]=value
+            print ('find',driver_id[i])
+            print (driving_time)
+            writer.writerow(driving_time)
+
+    buff2 = StringIO(buff.getvalue().encode())
+    bucket = 'nyctaxi-trip-data'
+    key = 'output_result.csv'
+
+    client = boto3.client('s3')
+    client.upload_fileobj(buff2, bucket, key)
+
