@@ -19,4 +19,4 @@ The fatigue driving criteria is that the resting time within two hours is less t
 
 
 # Web UI
-The Web UI is built using Dash. The total driving time for each driver and the fatigue driver ID were read directly from topic. 
+The Web UI is built using Dash. The total driving time for each driver and the fatigue driver ID are read directly from topic. 
