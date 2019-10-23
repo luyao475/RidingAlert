@@ -1,0 +1,37 @@
+from kafka import KafkaConsumer
+import boto3
+import csv
+from io import BytesIO as StringIO
+buff = StringIO()
+
+writer = csv.writer(buff, dialect='excel', delimiter=',')
+
+
+consumer = KafkaConsumer(
+    'TABLE_AGGRE_SUM',
+     bootstrap_servers=['10.0.0.8:9092'],
+     auto_offset_reset='earliest',
+     enable_auto_commit=False,
+      )
+fatigue_drivers={}
+
+for message in consumer:
+    message = message.value
+    #print(message)
+    key = message.split(',')[0]
+    value = int(message.split(',')[1])
+    if value > 6300:
+        fatigue_drivers[key]=value
+        print ('key',fatigue_drivers.keys()[:20]) 
+        print ('values',fatigue_drivers.values()[:20]) 
+
+        writer.writerow(fatigue_drivers.keys()[:20])
+        writer.writerow(fatigue_drivers.values()[:20])
+
+    buff2 = StringIO(buff.getvalue().encode())
+    bucket = 'nyctaxi-trip-data'
+    key = 'fatigue_result.csv'
+
+    client = boto3.client('s3')
+    client.upload_fileobj(buff2, bucket, key)
+
