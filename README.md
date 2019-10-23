@@ -19,4 +19,4 @@ The fatigue driving criteria is that the resting time within two hours is less t
 
 
 # Web UI
-The Web UI is built using dash. A python wrapper for the KSQL REST API available at https://pypi.org/project/ksql/ is used to read streamed data and plot in Dash.
+The Web UI is built using Dash. The total driving time for each driver and the fatigue driver ID were read directly from topic. 
